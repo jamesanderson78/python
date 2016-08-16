@@ -8,11 +8,7 @@ import cx_Oracle
 import csv
  
 SQL="SELECT 'mySuccess' FROM dual"
- 
-# # Network drive somewhere
-# filename="S:\Output.csv"
-# FILE=open(filename,"w");
-# output=csv.writer(FILE, dialect='excel')
+
  
 # # You can set these in system variables but just in case you didnt
 # os.putenv('ORACLE_HOME', '/oracle/product/10.2.0/db_1') 
