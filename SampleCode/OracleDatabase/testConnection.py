@@ -9,13 +9,13 @@ import csv
  
 SQL="SELECT 'mySuccess' FROM dual"
 
- 
-# # You can set these in system variables but just in case you didnt
-# os.putenv('ORACLE_HOME', '/oracle/product/10.2.0/db_1') 
-# os.putenv('LD_LIBRARY_PATH', '/oracle/product/10.2.0/db_1/lib') 
 
 # Use TNSNAMES.ORA for database connection
 connection = cx_Oracle.connect('CMSTRACK', 'password', 'APPDBTST.WORLD')
+
+# # Implement the Oracle connection with WALLET instead of username/password
+# # http://stackoverflow.com/questions/10485145/authentication-with-public-keys-and-cx-oracle-using-python
+# connection = cx_Oracle.connect("/@ORCL_MY_USER")
  
 cursor = connection.cursor()
 cursor.execute(SQL)
