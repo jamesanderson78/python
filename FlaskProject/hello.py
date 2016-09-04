@@ -1,15 +1,24 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from flask import render_template
 
 from random import randint
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 from specials import *
 
 # This displays a plotly.js graph
 @app.route('/plot/')
 def boxplot():
     return render_template('boxplot.html')
+
+# This displays a plotly.js graph
+@app.route('/plotBubble/')
+def boxplotBubble():
+    return render_template('boxplotBubble.html')
+
+@app.route('/csv/<path:path>')
+def send_csv(path):
+    return send_from_directory('csv', path)
 
 
 # This passes a function to a template
@@ -30,12 +39,15 @@ def lucky():
 def test_page():
     return "This is a test page."
 
+# @app.route('/process/<proc_name>/')
+# def process_page(proc_name):
+#     return render_template('process.html',
+#                            process_name=proc_name)
+
 @app.route('/process/<proc_name>/')
 def process_page(proc_name):
     return render_template('process.html',
                            process_name=proc_name)
-
-
 
 
 

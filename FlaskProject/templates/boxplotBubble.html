@@ -1,25 +1,40 @@
 <html>
 	<head>
+	  <script
+			  src="https://code.jquery.com/jquery-3.1.0.min.js"
+			  integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+			  crossorigin="anonymous"></script>
 		<!-- Plotly.js -->
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	</head>
 	<body>
+
+		<!--
+		<h1>PeopleSoft Process Statistics</h1>
+		<p>These statistics were calculated from the Process Monitor history. The data used in this analysis is a selection of the successful process runs from July 1, 2015 to June 30, 2016.</p>
+		<br />
+		-->
+		
 		<!-- Plotly chart will be drawn inside this DIV -->
 		<div id="myDiv"></div>
+		
+		
+		<br />
+		
 		<script>
 			/* JAVASCRIPT CODE GOES HERE */
 		
 Plotly.d3.csv('/csv/PS_ProcessMonitor_History.csv', function(err, rows){
-var procs_owners = ['PS', 'CSU', 'SJSU', 'Other'];
-var POP_TO_PX_SIZE = 0.1;
-function unpack(rows, key) {
-  return rows.map(function(row) { return row[key]; });
-}
+	var procs_owners = ['PS', 'CSU', 'SJSU', 'Other'];
+	var POP_TO_PX_SIZE = 0.1;
+	function unpack(rows, key) {
+		return rows.map(function(row) { return row[key]; });
+	}
 
-var data = procs_owners.map(function(PRCS_OWNER) {
-  var rowsFiltered = rows.filter(function(row) {
-      return (row.PRCS_OWNER === PRCS_OWNER);
-  });
+	var data = procs_owners.map(function(PRCS_OWNER) {
+		var rowsFiltered = rows.filter(function(row) {
+			return (row.PRCS_OWNER === PRCS_OWNER);
+		});
   
   return {
       mode: 'markers',
@@ -36,14 +51,27 @@ var data = procs_owners.map(function(PRCS_OWNER) {
 });
 
 var layout = {
-  xaxis: {title: 'Average Run Time', type: 'log'},
-  yaxis: {title: 'Total Run Count', type: 'log'},
-  margin: {t: 20},
+  title: 'PeopleSoft Process Statistics [FY 2106]',
+	xaxis: {title: 'Average Run Time (sec)', type: 'log'},
+  yaxis: {title: 'Total Run Count (FY2016)', type: 'log'},
   hovermode: 'closest'
 };
 
 Plotly.plot('myDiv', data, layout, {showLink: false});
 });
+
+
+$('#myDiv').on('plotly_click', function(event,data){
+	var pts = '';
+	for(var i=0; i<data.points.length; i++) {
+		pts = 'x = '+data.points[i].x +'\ny = '+data.points[i].y.toPrecision(4) + '\n\n';
+	}
+	alert('Closest point clicked:\n\n'+pts);
+});
+
+
+//downloadImage will accept the div as the first argument and an object specifying image properties as the other
+//Plotly.downloadImage(myDiv, {format: 'png', width: 800, height: 600, filename: 'ps_process_hist'});
 
 		</script>
 	</body>
