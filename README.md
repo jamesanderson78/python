@@ -5,10 +5,10 @@ This is a repository for my Python project files and contains my own personal wo
 
 ## Personal Work
 - FlaskProject
--- A sample Flask project to demonstrate PeopleSoft monitoring and MVC with Python
+  - A sample Flask project to demonstrate PeopleSoft monitoring and MVC with Python
 - SampleCode
--- File I/O - scripts for file input and output with "os" and "shutil" 
--- UnitTest - scripts for unit testing with "unittest"
--- JSON - scripts for using JSON
--- OracleDatabase - scripts for connecting to a database using cx_Oracle
+  - File I/O - scripts for file input and output with "os" and "shutil" 
+  - UnitTest - scripts for unit testing with "unittest"
+  - JSON - scripts for using JSON
+  - OracleDatabase - scripts for connecting to a database using cx_Oracle
 
