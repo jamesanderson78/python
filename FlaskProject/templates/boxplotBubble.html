@@ -63,10 +63,17 @@ Plotly.plot('myDiv', data, layout, {showLink: false});
 
 $('#myDiv').on('plotly_click', function(event,data){
 	var pts = '';
+	var t = '';
+	
 	for(var i=0; i<data.points.length; i++) {
-		pts = 'x = '+data.points[i].x +'\ny = '+data.points[i].y.toPrecision(4) + '\n\n';
+		// Process name label
+		pn = data.points[i].pointNumber;	
+		t = data.points[i].data.text[pn];
 	}
-	alert('Closest point clicked:\n\n'+pts);
+	
+	// get individual process detailed info
+	window.location.href = "/process/" + t + "/";
+	
 });
 
 
